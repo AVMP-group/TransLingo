@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - TransLingo</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">TransLingo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sign_in">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sign_up">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section class="about-section py-5">
+        <div class="container text-center">
+            <h1 class="display-4 animate__animated animate__fadeInUp">About TransLingo</h1>
+            <p class="lead mt-3 animate__animated animate__fadeInUp">TransLingo is a platform that seamlessly integrates language technologies to provide text, voice, and image-based translations. Our goal is to make language barriers disappear through advanced algorithms and a user-friendly experience.</p>
+            <div class="row mt-5">
+                <div class="col-md-6 mb-4">
+                    <img src="https://img.freepik.com/premium-vector/online-translator-translation-app-icon-chat-bubbles-with-language-translation-icons_178888-1703.jpg" alt="Our Mission" class="img-fluid rounded shadow animate__animated animate__fadeInLeft">
+                </div>
+                <div class="col-md-6 mb-4 text-left animate__animated animate__fadeInRight">
+                    <h3>Our Mission</h3>
+                    <p>To make communication across different languages effortless by integrating cutting-edge technologies that bridge language gaps, enabling users to connect and communicate more effectively.</p>
+                    <h3>Why TransLingo?</h3>
+                    <p>Whether it's text, voice, or image, TransLingo allows you to convert and translate across a wide range of languages with precision and efficiency. Our platform is designed to help users across the globe overcome language challenges with ease.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center bg-dark text-white py-4">
+        <p>&copy; 2024 TransLingo. All Rights Reserved.</p>
+        <a href="#" class="text-light">Privacy Policy</a> | <a href="#" class="text-light">Terms of Service</a>
+    </footer>
+
+    <!-- JS Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
