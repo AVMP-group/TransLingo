@@ -84,40 +84,10 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        const micButton = document.getElementById('micButton');
         const originalText = document.getElementById('originalText');
 
-        let recognition;
-        if ('webkitSpeechRecognition' in window) {
-            recognition = new webkitSpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            recognition.lang = 'en-US';
-
-            recognition.onstart = function() {
-                micButton.classList.add('active');
-            };
-
-            recognition.onend = function() {
-                micButton.classList.remove('active');
-            };
-
-            recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript;
-                originalText.value = transcript;
-            };
-        } else {
-            alert('Speech Recognition is not supported in this browser.');
-        }
-
-        micButton.addEventListener('click', function() {
-            if (recognition) {
-                recognition.start();
-            }
-        });
-
         $('#voiceToTextForm').on('submit', function(event) {
-            event.preventDefault();  // Prevent the form from refreshing the page
+            //event.preventDefault();  // Prevent the form from refreshing the page
             $(this).unbind('submit').submit(); // Re-enable form submission to allow Flask to handle it
         });
     </script>

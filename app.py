@@ -21,9 +21,19 @@ def get_db_connection():
 def index():
     return render_template('index.html')
 
-@app.route('/text_to_text')
+@app.route('/text_to_text',methods =['GET','POST'])
 def text_to_text():
-    return render_template('text_to_text.html')
+    original_text = ""
+    translation = ""
+    target_language = "en"  # Default to English
+
+    if request.method == 'POST':
+        # Get the text from the input field
+        original_text = request.form.get('originalText')
+        target_language = request.form.get('language')
+        translator = Translator()
+        translation = translator.translate(original_text, dest=target_language).text
+    return render_template('text_to_text.html',originalText=original_text, translation=translation, selected_language=target_language)
 
 @app.route('/voice_to_text', methods=['GET', 'POST'])
 def voice_to_text():
@@ -32,21 +42,30 @@ def voice_to_text():
     target_language = "en"  # Default to English
 
     if request.method == 'POST':
-        audio_file = request.files.get('audio_file')
-        if audio_file:
-            r = sr.Recognizer()
-            with sr.AudioFile(audio_file) as source:
-                audio_data = r.record(source)
-            try:
-                original_text = r.recognize_google(audio_data)
-                translator = Translator()
-                translation = translator.translate(original_text, dest=target_language).text
-            except sr.UnknownValueError:
-                original_text = "Could not understand audio"
-            except sr.RequestError as e:
-                original_text = f"Could not request results from Google Speech Recognition service; {e}"
-            except ValueError as e:
-                original_text = f"Error processing audio file: {e}"
+        # Get the text from the input field
+        original_text = request.form.get('originalText')
+        target_language = request.form.get('language')
+
+        if original_text:
+            # Translate the text
+            translator = Translator()
+            translation = translator.translate(original_text, dest=target_language).text
+        else:
+            # Check for an uploaded audio file
+            audio_file = request.files.get('audio_file')
+            if audio_file:
+                r = sr.Recognizer()
+                with sr.AudioFile(audio_file) as source:
+                    audio_data = r.record(source)
+                try:
+                    original_text = r.recognize_google(audio_data)
+                    translation = translator.translate(original_text, dest=target_language).text
+                except sr.UnknownValueError:
+                    original_text = "Could not understand audio"
+                except sr.RequestError as e:
+                    original_text = f"Could not request results from Google Speech Recognition service; {e}"
+                except ValueError as e:
+                    original_text = f"Error processing audio file: {e}"
 
     return render_template('voice_to_text.html', originalText=original_text, translation=translation, selected_language=target_language)
 
@@ -101,16 +120,5 @@ def sign_up():
 def about():
     return render_template('about.html')
 
-if __name__ == '__main__':
-    # Create tables if they don't exist
-    # conn = get_db_connection()
-    # conn.execute('''CREATE TABLE IF NOT EXISTS users (
-    #                 user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #                 username TEXT NOT NULL,
-    #                 email TEXT UNIQUE NOT NULL,
-    #                 password_hash TEXT NOT NULL,
-    #                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    #             )''')
-    # conn.close()
-    
+if __name__ == '__main__':   
     app.run(debug=True)
