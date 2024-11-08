@@ -1,9 +1,11 @@
 import bcrypt
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, flash
-from datetime import datetime
+# from datetime import datetime
 import speech_recognition as sr
 from googletrans import Translator
+from PIL import Image
+import pytesseract
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -69,9 +71,41 @@ def voice_to_text():
 
     return render_template('voice_to_text.html', originalText=original_text, translation=translation, selected_language=target_language)
 
-@app.route('/image_to_text')
+@app.route('/image_to_text', methods=['GET', 'POST'])
 def image_to_text():
-    return render_template('image_to_text.html')
+    extracted_text = None
+    translated_text = None
+
+    pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
+
+
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+
+        file = request.files['file']
+        target_language = request.form['language']  # Get selected language for translation
+
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+
+        if file:
+            # Process the file directly without saving it to disk
+            img = Image.open(file.stream)  # Open the uploaded image file
+            extracted_text = pytesseract.image_to_string(img)  # Extract text from the image
+
+            # Translate the extracted text
+            if extracted_text.strip():
+                translator = Translator()
+                translated = translator.translate(extracted_text, dest=target_language)
+                translated_text = translated.text
+
+            return render_template('image_to_text.html', extracted_text=extracted_text, translated_text=translated_text, selected_language=target_language)
+
+    return render_template('image_to_text.html', extracted_text=extracted_text, translated_text=translated_text)
+
 
 @app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():
