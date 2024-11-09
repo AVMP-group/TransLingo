@@ -94,7 +94,7 @@ def image_to_text():
         if file:
             # Process the file directly without saving it to disk
             img = Image.open(file.stream)  # Open the uploaded image file
-            extracted_text = pytesseract.image_to_string(img)  # Extract text from the image
+            extracted_text = pytesseract.image_to_string(img)  # Extracting text from the image
 
             # Translate the extracted text
             if extracted_text.strip():

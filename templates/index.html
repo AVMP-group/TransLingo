@@ -29,7 +29,21 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
+                {% if 'user_id' in session %}
                 <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/sign_in">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/sign_up">History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">Logout</a>
+                </li>
+                    {% else %}
+                    <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
@@ -40,6 +54,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
+                    {% endif %}
                 </li>
             </ul>
         </div>
