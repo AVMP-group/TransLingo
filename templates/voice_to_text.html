@@ -9,8 +9,10 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     
 </head>
@@ -52,7 +54,7 @@
             <div class="input-group">
                 <input type="text" id="originalText" name="originalText" class="form-control" placeholder="Speak or type here..." value="{{ originalText }}">
                 <div class="input-group-append">
-                    <button class="mic-button" type="button" id="micButton"><i class="fas fa-microphone"></i></button>
+                    <button class="mic-button" type="button" id="micButton"><i class="fa-solid fa-microphone"></i></button>
                 </div>
             </div>
         </div>
